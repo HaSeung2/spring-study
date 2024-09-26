@@ -25,6 +25,7 @@ public class RequestController {
     // GET http://localhost:8080/hello/request/form/param?name=하승&age=25
     @GetMapping("/form/param")
     @ResponseBody
+    // @RequestParam 생략 가능.
     public String helloGetRequestParam(@RequestParam(required = false) String name, int age) {
         return String.format("Hello, @RequestParam.<br> name = %s, age = %d", name, age);
     }
@@ -34,10 +35,46 @@ public class RequestController {
     // Header
     //  Content type: application/x-www-form-urlencoded
     // Body
-    //  name=Robbie&age=95
+    //  name=하승&age=25
     @PostMapping("/form/param")
     @ResponseBody
     public String helloPostRequestParam(@RequestParam String name, @RequestParam int age) {
         return String.format("Hello, @RequestParam.<br> name = %s, age = %d", name, age);
     }
+
+    // [Request sample]
+    // POST http://localhost:8080/hello/request/form/model
+    // Header
+    //  Content type: application/x-www-form-urlencoded
+    // Body
+    //  name=하승&age=25
+    @PostMapping("/form/model")
+    @ResponseBody
+    public String helloRequestBodyForm(@ModelAttribute Star star) {
+        return String.format("Hello, @ModelAttribute.<br> (name = %s, age = %d) ", star.name, star.age);
+    }
+
+    // [Request sample]
+    // GET http://localhost:8080/hello/request/form/param/model?name=하승&age=25
+    @GetMapping("/form/param/model")
+    @ResponseBody
+    // @ModelAttrubyte << 생략 가능
+    public String helloRequestParam(Star star) {
+        return String.format("Hello, @ModelAttribute.<br> (name = %s, age = %d) ", star.name, star.age);
+    }
+
+    // [Request sample]
+    // POST http://localhost:8080/hello/request/form/json
+    // Header
+    //  Content type: application/json
+    // Body
+    //  {"name":"하승","age":"25"}
+    @PostMapping("/form/json")
+    @ResponseBody
+    public String helloPostRequestJson(@RequestBody Star star) {
+        return String.format("Hello, @RequestBody.<br> (name = %s, age = %d) ", star.name, star.age);
+    }
+
+
+
 }
