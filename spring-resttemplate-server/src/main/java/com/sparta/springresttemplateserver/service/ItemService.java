@@ -1,8 +1,8 @@
 package com.sparta.springresttemplateserver.service;
 
-import com.sparta.springresttemplateserver.entity.Item;
 import com.sparta.springresttemplateserver.dto.ItemResponseDto;
 import com.sparta.springresttemplateserver.dto.UserRequestDto;
+import com.sparta.springresttemplateserver.entity.Item;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -20,11 +20,20 @@ public class ItemService {
     );
 
     public Item getCallObject(String query) {
+        for (Item item : itemList) {
+            if(item.getTitle().equals(query)) {
+                return item;
+            }
+        }
         return null;
     }
 
     public ItemResponseDto getCallList() {
-        return null;
+        ItemResponseDto responseDto = new ItemResponseDto();
+        for (Item item : itemList) {
+            responseDto.setItems(item);
+        }
+        return responseDto;
     }
 
     public Item postCall(String query, UserRequestDto requestDto) {
