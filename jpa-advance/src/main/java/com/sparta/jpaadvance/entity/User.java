@@ -3,6 +3,7 @@ package com.sparta.jpaadvance.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,5 +19,6 @@ public class User {
     private String name;
 
     @OneToMany(mappedBy = "user")
-    private List<Order> orderList = new ArrayList<>();
+    private List<Food> foodList = new ArrayList<>();
+
 }
