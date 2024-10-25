@@ -3,15 +3,14 @@ package com.sparta.myselectshop.scheduler;
 import com.sparta.myselectshop.entity.Product;
 import com.sparta.myselectshop.naver.dto.ItemDto;
 import com.sparta.myselectshop.naver.service.NaverApiService;
-import com.sparta.myselectshop.repositroy.ProductRepository;
+import com.sparta.myselectshop.repository.ProductRepository;
 import com.sparta.myselectshop.service.ProductService;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @Slf4j(topic = "Scheduler")
 @Component
@@ -41,7 +40,8 @@ public class Scheduler {
                 Long id = product.getId();
                 try {
                     productService.updateBySearch(id, itemDto);
-                } catch (Exception e) {
+                }
+                catch (Exception e) {
                     log.error(id + " : " + e.getMessage());
                 }
             }
