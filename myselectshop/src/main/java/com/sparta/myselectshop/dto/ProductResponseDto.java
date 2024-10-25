@@ -1,6 +1,8 @@
 package com.sparta.myselectshop.dto;
 
 import com.sparta.myselectshop.entity.Product;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,15 +14,20 @@ public class ProductResponseDto {
     private String title;
     private String link;
     private String image;
-    private int lPrice;
-    private int myPrice;
+    private int lprice;
+    private int myprice;
+    private List<FolderResponseDto> productFolderList = new ArrayList<>();
 
     public ProductResponseDto(Product product) {
         this.id = product.getId();
         this.title = product.getTitle();
         this.link = product.getLink();
         this.image = product.getImage();
-        this.lPrice = product.getLprice();
-        this.myPrice = product.getMyprice();
+        this.lprice = product.getLprice();
+        this.myprice = product.getMyprice();
+        productFolderList = product.getProductFolderList()
+                                   .stream()
+                                   .map(folder -> new FolderResponseDto(folder.getFolder()))
+                                   .toList();
     }
 }
