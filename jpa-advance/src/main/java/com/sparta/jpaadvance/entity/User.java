@@ -3,7 +3,6 @@ package com.sparta.jpaadvance.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Fetch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +17,7 @@ public class User {
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "user" , cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToMany(mappedBy = "user" , cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Food> foodList = new ArrayList<>();
 
     public void addFoodList(Food food) {

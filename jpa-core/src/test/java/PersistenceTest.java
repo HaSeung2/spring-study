@@ -28,7 +28,7 @@ public class PersistenceTest {
         try {
 
             Memo memo = new Memo();
-            memo.setId(1L);
+            memo.setId(10L);
             memo.setUsername("Robbie");
             memo.setContents("1차 캐시 Entity 저장");
 
@@ -78,14 +78,11 @@ public class PersistenceTest {
             System.out.println("memo2.getId() = " + memo2.getId());
             System.out.println("memo2.getUsername() = " + memo2.getUsername());
             System.out.println("memo2.getContents() = " + memo2.getContents());
-
-
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
             em.close();
         }
-
         emf.close();
     }
 
@@ -107,8 +104,8 @@ public class PersistenceTest {
             Memo memo2 = em.find(Memo.class, 1);
             Memo memo  = em.find(Memo.class, 2);
 
-            System.out.println(memo1 == memo2);
-            System.out.println(memo1 == memo);
+            System.out.println("memo1 == memo2 = " + (memo1 == memo2));
+            System.out.println("memo1 == memo3 = " + (memo1 == memo));
 
             et.commit();
         } catch (Exception ex) {
