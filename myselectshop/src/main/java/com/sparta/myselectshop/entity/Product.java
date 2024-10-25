@@ -12,9 +12,11 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity // JPA가 관리할 수 있는 Entity 클래스 지정
 @Getter
+@Setter
 @Table(name = "product") // 매핑할 테이블의 이름을 지정
 @NoArgsConstructor
 public class Product extends Timestamped {
@@ -33,10 +35,10 @@ public class Product extends Timestamped {
     private String link;
 
     @Column(nullable = false)
-    private int lPrice;
+    private int lprice;
 
     @Column(nullable = false)
-    private int myPrice;
+    private int myprice;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -46,15 +48,15 @@ public class Product extends Timestamped {
         this.title = requestDto.getTitle();
         this.image = requestDto.getImage();
         this.link = requestDto.getLink();
-        this.lPrice = requestDto.getLprice();
+        this.lprice = requestDto.getLprice();
         this.user = user;
     }
 
     public void update(int myPrice) {
-        this.myPrice = myPrice;
+        this.myprice = myPrice;
     }
 
-    public void updateByItemDto(int lPrice) {
-        this.lPrice = lPrice;
+    public void updateByItemDto(int lprice) {
+        this.lprice = lprice;
     }
 }
