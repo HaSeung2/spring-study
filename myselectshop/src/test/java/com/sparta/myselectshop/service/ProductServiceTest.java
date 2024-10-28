@@ -42,11 +42,19 @@ class ProductServiceTest {
         requestMyPriceDto.setMyprice(myprice);
 
         User user = new User();
-        ProductRequestDto requestProductDto = new ProductRequestDto("Apple <b>맥북</b> <b>프로</b> 16형 2021년 <b>M1</b> Max 10코어 실버 (MK1H3KH/A) ", "https://shopping-phinf.pstatic.net/main_2941337/29413376619.20220705152340.jpg", "https://search.shopping.naver.com/gate.nhn?id=29413376619", 3515000);
+        ProductRequestDto requestProductDto = new ProductRequestDto(
+            "Apple <b>맥북</b> <b>프로</b> 16형 2021년 <b>M1</b> Max 10코어 실버 (MK1H3KH/A) ",
+            "https://shopping-phinf.pstatic.net/main_2941337/29413376619.20220705152340.jpg",
+            "https://search.shopping.naver.com/gate.nhn?id=29413376619",
+            3515000
+        );
 
         Product product = new Product(requestProductDto, user);
 
-        ProductService productService = new ProductService(productRepository, productFolderRepository, folderRepository);
+        ProductService productService = new ProductService(productRepository,
+            productFolderRepository,
+            folderRepository
+        );
 
         given(productRepository.findById(productId)).willReturn(Optional.of(product));
 
@@ -67,7 +75,10 @@ class ProductServiceTest {
         ProductMypriceRequestDto requestMyPriceDto = new ProductMypriceRequestDto();
         requestMyPriceDto.setMyprice(myprice);
 
-        ProductService productService = new ProductService(productRepository, productFolderRepository, folderRepository);
+        ProductService productService = new ProductService(productRepository,
+            productFolderRepository,
+            folderRepository
+        );
 
         // when
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
@@ -75,6 +86,8 @@ class ProductServiceTest {
         });
 
         // then
-        assertEquals("유효하지 않은 관심 가격입니다. 최소 " + ProductService.MIN_MY_PRICE + "원 이상으로 설정해주세요", exception.getMessage());
+        assertEquals("유효하지 않은 관심 가격입니다. 최소 " + ProductService.MIN_MY_PRICE + "원 이상으로 설정해주세요",
+            exception.getMessage()
+        );
     }
 }
