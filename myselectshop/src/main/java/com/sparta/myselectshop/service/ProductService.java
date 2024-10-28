@@ -27,8 +27,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductService {
 
     private final ProductRepository productRepository;
-    private final FolderRepository folderRepository;
     private final ProductFolderRepository productFolderRepository;
+    private final FolderRepository folderRepository;
 
     public static final int MIN_MY_PRICE = 100;
 
